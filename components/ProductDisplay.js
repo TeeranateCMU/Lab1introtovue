@@ -23,7 +23,6 @@ const productDisplay = {
             <button class="button" :disable='!inStock' @click="addToCart" :class="{'disabledButton': !inStock}">Add To Cart</button>
             <button class="button" :disable='!inStock' @click="removeFormCart" :class="{'disabledButton': !inStock}">Remoce from cart</button>
             <button class="button" @click="changeStatus">{{ inStock ? 'Out of Stock' : 'In Stock' }}</button>
-            <review-form @review-submitted="addReview"></review-form>
         </div>`,
         props: {
             premium: Boolean,
@@ -36,7 +35,6 @@ const productDisplay = {
             const click = ref('https://www.camt.cmu.ac.th/index.php/th/')
             const inventory = ref('11')
             const onsale = ref(true)
-            const reviews = ref([])
             const shipping = computed(()=>{
                 if (props.premium){
                     return 'Free'
@@ -75,9 +73,6 @@ const productDisplay = {
             }
             function updateVariant(index){
                 selectedVariant.value = index;
-            }
-            function addReview(review){
-                review.value.push(review)
             }
         
             return{
