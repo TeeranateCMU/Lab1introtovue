@@ -23,22 +23,23 @@
         </div>
         <div class="product-info">
             <a :href="click"><h1>{{title}}</h1></a>
+            <p>{{description}}</p>
+            <p v-if="inventory > 10">In Stock</p>
+            <p v-else-if = "inventory <= 10 && inventory > 0">Almost out of stock</p>
+            <p v-else>Out Of Stock</p>
+            <p v-if="onsale == true">on sale</p>
+            <p v-else-if="onsale != true">not on sale</p>
+            <p v-if="sale">on sale</p>
+            <p v-else>Not on sale</p>
+            <ul>
+                <li v-for="detail in details">{{detail}}</li>
+            </ul>
+            <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}">
+            </div>
+            <p><span v-for="sockSize in sockSizes">{{sockSize}}</span></p>
+            <button class="button" :disable='!inStock' @click="addToCart" :class="{'disabledButton': !inStock}">Add To Cart</button>
+            <button class="button" @click="changeStatus">{{ inStock ? 'Out of Stock' : 'In Stock' }}</button>
         </div>
-        <p>{{description}}</p>
-        <p v-if="inventory > 10">In Stock</p>
-        <p v-else-if = "inventory <= 10 && inventory > 0">Almost out of stock</p>
-        <p v-else>Out Of Stock</p>
-        <p v-if="onSale">{{ brand + ' ' + product + ' is on sale' }}</p> 
-        <p v-else-if="onsale != true">not on sale</p>
-        
-        <ul>
-            <li v-for="detail in details">{{detail}}</li>
-        </ul>
-        <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}">
-        </div>
-        <p><span v-for="sockSize in sockSizes">{{sockSize}}</span></p>
-        <button class="button" :disable='!inStock' @click="addToCart" :class="{'disabledButton': !inStock}">Add To Cart</button>
-        <button class="button" @click="changeStatus">{{ inStock ? 'Out of Stock' : 'In Stock' }}</button>
     </div>
 
     <!-- Import Js -->
