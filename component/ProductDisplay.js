@@ -42,7 +42,6 @@ const productDisplay = {
             ])
             const selectedVariant = ref(0)
             const sockSizes = ref(['S','M','L'])
-            const cart = ref(0)
     
             const title = computed(() =>{
                 return brand.value + ' ' + product.value
@@ -78,7 +77,6 @@ const productDisplay = {
                 details,
                 variants,
                 sockSizes,
-                cart,
                 addToCart,
                 updateImage,
                 changeStatus,
