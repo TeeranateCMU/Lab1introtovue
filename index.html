@@ -24,8 +24,11 @@
             <a :href="click"><h1>{{product}}</h1></a>
         </div>
         <p>{{description}}</p>
-        <p v-if="inStock">In Stock</p>
+        <p v-if="inventory > 10">In Stock</p>
+        <p v-else-if = "inventory <= 10 && inventory > 0">Almost out of stock</p>
         <p v-else>Out Of Stock</p>
+        <p v-if="onsale == true">on sale</p>
+        <p v-else-if="onsale != true">not on sale</p>
     </div>
 
     <!-- Import Js -->
