@@ -59,7 +59,7 @@ const productDisplay = {
             })
     
             function addToCart() {
-               emit('add-to-card', variants.value[selectedVariant.value].id)
+                emit('add-to-card', variants.value[selectedVariant.value].id)
             }
             function updateImage(variantImage){
                 image.value = variantImage
