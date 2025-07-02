@@ -22,7 +22,7 @@ const productDisplay = {
             </div>
             <p><span v-for="sockSize in sockSizes">{{sockSize}}</span></p>
             <button class="button" :disable='!inStock' @click="addToCart" :class="{'disabledButton': !inStock}">Add To Cart</button>
-            <button class="button" :disable='!inStock' @click="removeFormCart" :class="{'disabledButton': !inStock}">Remoce from cart</button>
+            <button class="button" :disable='!inStock' @click="removeFormCart" :class="{'disabledButton': !inStock}">Remove From Cart</button>
             <button class="button" @click="changeStatus">{{ inStock ? 'Out of Stock' : 'In Stock' }}</button>
             <review-list v-if="reviews.length" :reviews="reviews"></review-list>
             <review-form @review-submitted="addReview"></review-form>
@@ -34,7 +34,7 @@ const productDisplay = {
         setup(props, { emit }) {
             const product = ref('boot')
             const brand = ref('SE 311')
-            const description = ref('this is boots use to walk')
+            const description = ref('Comfortable Socks & Boots')
             const click = ref('https://www.camt.cmu.ac.th/index.php/th/')
             const inventory = ref('11')
             const onsale = ref(true)
