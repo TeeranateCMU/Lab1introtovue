@@ -9,6 +9,6 @@ const app = createApp ({
     }
 })
 
-app.components('product-display', productDisplay)
+app.component('product-display', productDisplay)
 
 app.mount('#app')
