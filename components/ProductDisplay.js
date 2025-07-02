@@ -21,6 +21,7 @@ const productDisplay = {
             </div>
             <p><span v-for="sockSize in sockSizes">{{sockSize}}</span></p>
             <button class="button" :disable='!inStock' @click="addToCart" :class="{'disabledButton': !inStock}">Add To Cart</button>
+            <button class="button" :disable='!inStock' @click="removeFormCart" :class="{'disabledButton': !inStock}">Remoce from cart</button>
             <button class="button" @click="changeStatus">{{ inStock ? 'Out of Stock' : 'In Stock' }}</button>
         </div>`,
         props: {
@@ -61,6 +62,9 @@ const productDisplay = {
             function addToCart() {
                 emit('add-to-card', variants.value[selectedVariant.value].id)
             }
+            function removeFormCart() {
+                emit('remove-from-cart', variants.value[selectedVariant.value].id)
+            }
             function updateImage(variantImage){
                 image.value = variantImage
             }
@@ -77,6 +81,7 @@ const productDisplay = {
                 description,
                 image,
                 click,
+                removeFormCart,
                 inventory,
                 onsale,
                 variants,
