@@ -8,21 +8,23 @@ createApp ({
         const click = ref('https://www.camt.cmu.ac.th/index.php/th/')
         const inventory = ref('11')
         const onsale = ref(true)
+        const sale = ref(true)
         const details = ref([
             '50% cotton',
             '30% wool',
             '20% polyester'
         ])
         const variants = ref([
-            { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50},
-            { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0}
+            { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50, sale: true},
+            { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0,sale: false}
         ])
         const selectedVariant = ref(0)
         const sockSizes = ref(['S','M','L'])
         const cart = ref(0)
 
         const title = computed(() =>{
-            return brand.value + ' ' + product.value
+            const variant = variants.value[selectedVariant.value]
+            return brand.value + ' ' + product.value + (variant.sale ? ' is on sale' : ' not on sale')
         })
         const image = computed(() => {
             return variants.value[selectedVariant.value].image
@@ -52,6 +54,7 @@ createApp ({
             click,
             inventory,
             onsale,
+            sale,
             details,
             variants,
             sockSizes,
