@@ -1,26 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+const {createApp, ref, computed} = Vue;
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Intro SE331</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./assets/styles.css" />
-    <!-- Import Vue.js -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
+const app = createApp ({
+    setup() {
+        const cart = ref([])
+        const premium = ref(true)
+        function updateCart(_id) {
+            for (var i = 0; i < cart.value.length; i++) {
+                if(cart.value[i].id === _id){
+                    cart.value[i].amount++;
+                    return;
+                }
+            }
+            cart.value.push({id:_id, amount: 1})
+            return;
+        }
+        function removeFromCart(_id){
+            for (var i = 0; i < cart.value.length; i++) {
+                if(cart.value[i].id === _id){
+                    if(--cart.value[i].amount === 0){
+                        cart.value.splice(i, 1);
+                    }
+                    return;
+                }
+            }
+        }
+        const details = ref(["50% cotton", "30% wool", "20% polyester"])
+        return{
+            cart,
+            premium,
+            details,
+            updateCart,
+            removeFromCart
+        }
+    }
+})
 
-<body>
-    <div id="app">
-        <div class="nav-bar"></div>
-        <div class="cart">Cart {{cart}}</div>
-        <product-display :premium ="premium" :details="details"></product-display>
-    </div>
-
-    <!-- Import Js -->
-     <script src="./components/ProductDetails.js"></script>
-    <script src="./components/ProductDisplay.js"></script>
-    <script src="./main.js"></script>
-</body>
-
-</html>
+app.component('product-display', productDisplay)
+    .component("product-details", productDetails)
+    .component("review-form", reviewForm)
+    .mount("#app")
