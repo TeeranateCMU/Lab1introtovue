@@ -27,7 +27,7 @@ const productDisplay = {
             premium: Boolean,
             details: Array,
         },
-        setup(props) {
+        setup(props, { emit }) {
             const product = ref('boot')
             const brand = ref('SE 311')
             const description = ref('this is boots use to walk')
@@ -59,7 +59,7 @@ const productDisplay = {
             })
     
             function addToCart() {
-                cart.value +=1
+                emit('add-to-card')
             }
             function updateImage(variantImage){
                 image.value = variantImage
