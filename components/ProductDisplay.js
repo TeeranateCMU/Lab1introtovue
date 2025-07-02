@@ -16,9 +16,7 @@ const productDisplay = {
             <p> Shipping: {{shipping}}</p>
             <p v-if="onsale == true">on sale</p>
             <p v-else-if="onsale != true">not on sale</p>
-            <ul>
-                <li v-for="detail in details">{{detail}}</li>
-            </ul>
+            <product-details :details></product-details>
             <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}">
             </div>
             <p><span v-for="sockSize in sockSizes">{{sockSize}}</span></p>
@@ -26,7 +24,8 @@ const productDisplay = {
             <button class="button" @click="changeStatus">{{ inStock ? 'Out of Stock' : 'In Stock' }}</button>
         </div>`,
         props: {
-            premium: Boolean
+            premium: Boolean,
+            details: Array,
         },
         setup(props) {
             const product = ref('boot')
@@ -42,11 +41,6 @@ const productDisplay = {
                     return 30
                 }
             })
-            const details = ref([
-                '50% cotton',
-                '30% wool',
-                '20% polyester'
-            ])
             const variants = ref([
                 { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50},
                 { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0}
@@ -85,7 +79,6 @@ const productDisplay = {
                 click,
                 inventory,
                 onsale,
-                details,
                 variants,
                 sockSizes,
                 addToCart,
